@@ -1,0 +1,34 @@
+# cd 
+alias ..="cd .."
+alias cdg="cd ~/ghq"
+alias cds="cd ~/.ssh"
+alias cdot="cd ~/dotfiles"
+
+# ls
+alias ll="ls -la"
+
+# code
+alias code="code ."
+
+# cursor 
+alias cursor="cursor ."
+
+# open 
+alias open="open ."
+
+# exit 
+alias e="exit"
+
+# tmux
+alias tx="tmux"
+alias txa="tmux a"
+
+# source
+alias zrc="source ~/.zshrc"
+
+# less 
+alias lp="less -iMN ~/dotfiles/zsh-settings/.peco"
+alias la="less -iMN ~/dotfiles/zsh-settings/.alias"
+
+# ghq 
+alias gua="ghq list | ghq get -u -P"

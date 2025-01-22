@@ -1,0 +1,20 @@
+# search local repository
+## for iterm2(with bind key, ctl + T)
+#function peco-src () {
+#  local selected_dir=$(ghq list -p | peco --prompt="repositories >" --query "$LBUFFER")
+#  if [ -n "$selected_dir" ]; then
+#    BUFFER="cd ${selected_dir}"
+#    zle accept-line
+#  fi
+#  zle clear-screen
+# }
+# zle -N peco-src
+# bindkey '^T' peco-src
+
+## for warp (no bindkey)
+function g () {
+  local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
+  if [ -n "$selected_dir" ]; then
+    cd ${selected_dir}
+  fi
+}
