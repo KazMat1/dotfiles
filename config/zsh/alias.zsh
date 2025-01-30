@@ -4,7 +4,7 @@
 alias ..="cd .."
 alias cdg="cd $HOME/ghq/github.com"
 alias cds="cd $HOME/.ssh"
-alias cdot="cd $DOTFILES_DIR"
+alias cdot="cd $HOME/dotfiles"
 
 # --------------------
 # ls
@@ -54,3 +54,32 @@ alias lzc="less -iMN $HOME/.zshrc"
 # --------------------
 # update all repositories under ghq
 alias gua="ghq list | ghq get -u -P"
+
+# --------------------
+# git
+# --------------------
+alias gaa="git add ."
+alias gb="git branch"
+alias gba="git branch -a"
+alias gbm="git branch -m"
+alias gbd="git branch -d"
+alias gbD="git branch -D"
+alias gc="git commit"
+alias gca="git commit --amend"
+alias gcm="git commit -m"
+alias gcf="git commit --fixup"
+alias gf="git fetch"
+alias gl="git log"
+alias glo="git log --oneline"
+alias gm="git merge"
+alias gplo="git pull origin"
+alias gpso="git push origin"
+alias gs="git switch"
+alias gsc="git switch -c"
+alias gst="git status"
+alias gsts="git stash"
+alias gstsa="git stash apply"
+alias gstsu="git stash -u"
+alias gstsl="git stash list"
+alias gstsp="git stash pop"
+alias gstss="git stash save"
