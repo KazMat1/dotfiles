@@ -85,3 +85,4 @@ alias gstsu="git stash -u"
 alias gstsl="git stash list"
 alias gstsp="git stash pop"
 alias gstss="git stash save"
+alias gra='git rebase --autosquash -i'

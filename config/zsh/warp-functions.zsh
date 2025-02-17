@@ -3,12 +3,17 @@
 # --------------------
 
 # --------------------
-# search repository function without bind key. 
+# search repository without bind key. 
 # combination of peco and ghq
 # --------------------
 function g () {
-  local selected_dir=$(ghq list -p | peco --query "$LBUFFER")
-  if [ -n "$selected_dir" ]; then
-    cd ${selected_dir}
-  fi
+  cd-selected-repo
+}
+
+# --------------------
+# select commit for fixup in current repository without bind key. 
+# combination of peco and git 
+# --------------------
+function f () {
+  fixup-selected-commit
 }
