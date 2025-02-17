@@ -2,6 +2,8 @@
 # Settings for Item2 
 # --------------------
 
+# REF: https://blog.omuomugin.com/posts/2024-03-01/
+
 # --------------------
 # Search repository function with bind key(ctl + T), ctl + T
 # combination of peco and ghq
