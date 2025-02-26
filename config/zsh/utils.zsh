@@ -21,7 +21,7 @@ function stash-changes-and-force-pull-in-current-branch() {
 # summarize diff output between current branch and main
 # --------------------
 function summarize-diff-with-main() {
-  git diff --shortstat main
+  gds
 }
 
 # --------------------
@@ -42,4 +42,24 @@ function cd-selected-repo () {
   if [ -n "$selected_dir" ]; then
     cd ${selected_dir}
   fi
+}
+
+
+# --------------------
+# notify whether success or failure to user with the sound
+# --------------------
+function notify () {
+  if [ "$?" = 0 ]; then
+    success
+  else
+    failure
+  fi
+}
+
+function success () {
+  afplay /System/Library/Sounds/Blow.aiff
+}
+
+function failure () {
+  afplay /System/Library/Sounds/Bottle.aiff
 }

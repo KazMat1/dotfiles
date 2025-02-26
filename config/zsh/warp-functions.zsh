@@ -17,3 +17,11 @@ function g () {
 function f () {
   fixup-selected-commit
 }
+
+# --------------------
+# select commit for fixup in current repository without bind key. 
+# combination of peco and git 
+# --------------------
+function d () {
+  summarize-diff-with-main
+}

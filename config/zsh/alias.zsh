@@ -45,8 +45,8 @@ alias zrc="source $HOME/.zshrc"
 # --------------------
 # less
 # --------------------
-alias lw="less -iMN $DOTFILES_CONFIG_DIR/zsh/warp-functions.zsh"
-alias la="less -iMN $DOTFILES_CONFIG_DIR/zsh/alias.zsh"
+alias lw="less -iMN $HOME/dotfiles/config/zsh/warp-functions.zsh"
+alias la="less -iMN $HOME/dotfiles/config/zsh/alias.zsh"
 alias lzc="less -iMN $HOME/.zshrc"
 
 # --------------------
@@ -69,6 +69,7 @@ alias gc="git commit"
 alias gca="git commit --amend"
 alias gcm="git commit -m"
 alias gcf="git commit --fixup"
+alias gds="git diff --shortstat main"
 alias gf="git fetch"
 alias gfp="git fetch --prune"
 alias gl="git log"
