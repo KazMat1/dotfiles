@@ -1,9 +1,9 @@
 # --------------------
-# Settings for Warp  
+# Settings for Warp
 # --------------------
 
 # --------------------
-# search repository without bind key. 
+# search repository without bind key.
 # combination of peco and ghq
 # --------------------
 function g () {
@@ -11,16 +11,23 @@ function g () {
 }
 
 # --------------------
-# select commit for fixup in current repository without bind key. 
-# combination of peco and git 
+# display current branch without bind key.
+# --------------------
+function c () {
+  display-current-branch
+}
+
+# --------------------
+# select commit for fixup in current repository without bind key.
+# combination of peco and git
 # --------------------
 function f () {
   fixup-selected-commit
 }
 
 # --------------------
-# select commit for fixup in current repository without bind key. 
-# combination of peco and git 
+# select commit for fixup in current repository without bind key.
+# combination of peco and git
 # --------------------
 function d () {
   summarize-diff-with-main

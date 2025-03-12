@@ -10,11 +10,16 @@ function delete-merged-branches() {
   git branch --merged | egrep -v "\*|${protected_branches}" | xargs git branch -d
 }
 
+function display-current-branch() {
+  git branch --show-current
+}
+
 # --------------------
 # stash current changes and reset --hard based on remote of current branch
 # --------------------
 function stash-changes-and-force-pull-in-current-branch() {
-  git stash save "force pull の stash" -u && git fetch --prune && git reset --hard origin/$(git branch --contains | cut -d " " -f 2)
+#   git stash save "force pull の stash" -u && git fetch --prune && git reset --hard origin/$(git branch --contains | cut -d " " -f 2)
+  git stash save "force pull の stash" -u && git fetch --prune && git reset --hard origin/$(display-current-branch)
 }
 
 # --------------------
@@ -43,7 +48,6 @@ function cd-selected-repo () {
     cd ${selected_dir}
   fi
 }
-
 
 # --------------------
 # notify whether success or failure to user with the sound
