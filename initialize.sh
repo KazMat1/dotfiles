@@ -5,7 +5,7 @@ SCRIPT_SETUP_DIR=~/dotfiles/scripts/setup
 # スクリプトに実行権限を付与し、実行後に元の権限に戻す関数
 run_script_with_original_permissions() {
     local script_path="$1"
-    
+
     # 元の権限を保存
     local previous_permissions=$(stat -f %A "$script_path")
 
@@ -32,15 +32,11 @@ reload_zsh_settings() {
 main() {
     # ----
     # for brew packages and apps
-    # 
-    # 動くことを確認できてない
     # ----
-    # run_script_with_original_permissions $SCRIPT_SETUP_DIR/install-brew-packages-and-apps.sh
+    run_script_with_original_permissions $SCRIPT_SETUP_DIR/install-brew-packages-and-apps.sh
 
     # ----
     # for zsh settings
-    # 
-    # 動くことを確認済
     # ----
     run_script_with_original_permissions $SCRIPT_SETUP_DIR/setup-zsh.sh
     reload_zsh_settings

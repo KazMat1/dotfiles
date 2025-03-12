@@ -31,7 +31,6 @@ backup_existing_file_and_create_symlink() {
 
 # メイン処理
 main() {
-
     echo "🚀 Setting up Zsh..."
     echo "Please enter the backup directory path. (default: $DEFAULT_BACKUP_DIR):"
     read -r ZSH_BACKUP_DIR
@@ -46,7 +45,7 @@ main() {
     # バックアップとシンボリックリンクの作成
     backup_existing_file_and_create_symlink ~/dotfiles/.zshrc ~/.zshrc $ZSH_BACKUP_DIR
     backup_existing_file_and_create_symlink ~/dotfiles/.zshenv ~/.zshenv $ZSH_BACKUP_DIR
-    
+
     echo "✅ Complete setting up Zsh"
 }
 
