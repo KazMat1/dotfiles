@@ -10,10 +10,16 @@ function delete-merged-branches() {
   git branch --merged | egrep -v "\*|${protected_branches}" | xargs git branch -d
 }
 
+# --------------------
+# display current branch
+# --------------------
 function display-current-branch() {
   git branch --show-current
 }
 
+# --------------------
+# install all repositories under the owner
+# --------------------
 function install-all-repositories() {
     echo "🙏 Please enter the owner whose you want to clone repositories :"
     read -r GITHUB_OWNER
@@ -22,7 +28,7 @@ function install-all-repositories() {
         echo "⚠️ \033[31m No input provided. Please enter the owner again :\033[31m"
         read -r GITHUB_OWNER
         if [ -z "$GITHUB_OWNER" ]; then
-            echo "🚫 \033[31mNo input provided. Exiting...\033[31m"
+            echo "🚫 \033[31m No input provided. Exiting...\033[31m"
             return 1
         fi
     fi
@@ -41,7 +47,13 @@ function stash-changes-and-force-pull-in-current-branch() {
 # summarize diff output between current branch and main
 # --------------------
 function summarize-diff-with-main() {
-  gds
+    MAIN_BRANCH="main"
+    if [ $(display-current-branch) = $MAIN_BRANCH ]; then
+        echo "🚫 \033[31m You are already in main. Exiting...\033[31m"
+        return 1
+    else
+        git diff --shortstat $MAIN_BRANCH
+    fi
 }
 
 # --------------------
