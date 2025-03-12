@@ -28,7 +28,7 @@ alias open="open ."
 
 # --------------------
 # exit
-# -------------------- 
+# --------------------
 alias e="exit"
 
 # --------------------
@@ -53,7 +53,8 @@ alias lzc="less -iMN $HOME/.zshrc"
 # ghq
 # --------------------
 # update all repositories under ghq
-alias gua="ghq list | ghq get -u -P"
+alias ghqua="ghq list | ghq get -u -P"
+alias ghqg="ghq get"
 
 # --------------------
 # git
