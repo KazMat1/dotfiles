@@ -14,6 +14,21 @@ function display-current-branch() {
   git branch --show-current
 }
 
+function install-all-repositories() {
+    echo "🙏 Please enter the owner whose you want to clone repositories :"
+    read -r GITHUB_OWNER
+
+    if [ -z "$GITHUB_OWNER" ]; then
+        echo "⚠️ \033[31m No input provided. Please enter the owner again :\033[31m"
+        read -r GITHUB_OWNER
+        if [ -z "$GITHUB_OWNER" ]; then
+            echo "🚫 \033[31mNo input provided. Exiting...\033[31m"
+            return 1
+        fi
+    fi
+  gh repo list $GITHUB_OWNER | awk '{print "ghq", "get", "git@github.com:"$1".git"}' | bash
+}
+
 # --------------------
 # stash current changes and reset --hard based on remote of current branch
 # --------------------

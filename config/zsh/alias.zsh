@@ -52,9 +52,11 @@ alias lzc="less -iMN $HOME/.zshrc"
 # --------------------
 # ghq
 # --------------------
+alias ghqg="ghq get"
+# install all repositories by ghq
+alias ghqga="install-all-repositories"
 # update all repositories under ghq
 alias ghqua="ghq list | ghq get -u -P"
-alias ghqg="ghq get"
 
 # --------------------
 # git
