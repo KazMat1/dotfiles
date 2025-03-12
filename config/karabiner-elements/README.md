@@ -1,7 +1,12 @@
 ## back up of config in karabiner-elements
-### useage 
+### useage
 1. move a directory, 'karabiner' to ~/.config/karabiner in your new laptop
 1. that's all for importing back up.
+
+### command
+```
+cp ~/dotfiles/config/karabiner-elements/karabiner ~/config/karabiner
+```
 
 ### notice
 Actually, file needed to ingerit config is only karabiner.json, but back up direectory.
