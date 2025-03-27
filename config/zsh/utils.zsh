@@ -20,7 +20,7 @@ function display-current-branch() {
 # --------------------
 # install all repositories under the owner
 # --------------------
-function install-all-repositories() {
+function install-input-repositories() {
     echo "🙏 Please enter the owner whose you want to clone repositories :"
     read -r GITHUB_OWNER
 
@@ -33,6 +33,34 @@ function install-all-repositories() {
         fi
     fi
   gh repo list $GITHUB_OWNER | awk '{print "ghq", "get", "git@github.com:"$1".git"}' | bash
+}
+
+# --------------------
+# install all repositories under the owner with gh cli
+# --------------------
+function install-selected-repositories() {
+    echo ":pray: Please enter the owner whose you want to clone repositories :"
+    GITHUB_OWNER = gh org list | peco
+
+    if [ -z "$GITHUB_OWNER" ]; then
+        echo ":warning: \033[31m No input provided. Please enter the owner again :\033[31m"
+        read -r GITHUB_OWNER
+        if [ -z "$GITHUB_OWNER" ]; then
+            echo ":no_entry_sign: \033[31m No input provided. Exiting...\033[31m"
+            return 1
+        fi
+    fi
+  gh repo list $GITHUB_OWNER | awk '{print "ghq", "get", "git@github.com:"$1".git"}' | bash
+}
+
+# --------------------
+# switch branch you selected
+# --------------------
+function switch-selected-branch() {
+  local selected_branch=$(git branch | peco | awk '{print $1}')
+  if [ -n "$selected_branch" ]; then
+    git switch $selected_branch
+  fi
 }
 
 # --------------------

@@ -18,6 +18,13 @@ function c () {
 }
 
 # --------------------
+# display current branch without bind key.
+# --------------------
+function s () {
+  switch-selected-branch
+}
+
+# --------------------
 # select commit for fixup in current repository without bind key.
 # combination of peco and git
 # --------------------
