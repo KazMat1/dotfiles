@@ -39,7 +39,6 @@ function install-input-repositories() {
 # install all repositories under the owner with gh cli
 # --------------------
 function install-selected-repositories() {
-    echo ":pray: Please enter the owner whose you want to clone repositories :"
     GITHUB_OWNER = gh org list | peco
 
     if [ -z "$GITHUB_OWNER" ]; then
