@@ -103,6 +103,45 @@ function cd-selected-repo () {
   fi
 }
 
+function get-pr-list () {
+  # 特定期間のPRを取得（JSON形式）
+  gh pr list \
+    --repo sensyn-robotics/plant-check \
+    --state all \
+    --limit 100 \
+    --json number,title,createdAt,closedAt,state \
+    --jq '.[] | select(.createdAt >= "2024-01-01T00:00:00Z" and .createdAt <= "2024-12-31T23:59:59Z")'
+}
+
+# シンプル版（リポジトリのみ指定）
+function pr_analysis() {
+    local repo="$1"
+    if [[ -z "$repo" ]]; then
+        echo "Usage: pr_analysis owner/repository"
+        return 1
+    fi
+    # after_startと同いちにちじ
+    local improvement_date="2025-03-08T00:00:00Z"
+    local before_start="2025-01-01T00:00:00Z"
+    local before_end="2025-03-07T23:59:59Z"
+    local after_start="2025-03-08T00:00:00Z"
+    local after_end="2025-6-31T23:59:59Z"
+
+    echo "=== 改善前 ==="
+    gh pr list --repo "$repo" --state closed --limit 200 \
+      --json createdAt,mergedAt \
+      --jq --arg start "$before_start" --arg end "$before_end" '
+        [.[] | select(.createdAt >= $start and .createdAt <= $end and .mergedAt != null)] |
+        "Count: \(length), Average: \(if length > 0 then (map((.mergedAt | fromdateiso8601) - (.createdAt | fromdateiso8601)) | add / length / 3600 | floor) else 0 end) hours"'
+
+    echo "=== 改善後 ==="
+    gh pr list --repo "$repo" --state closed --limit 200 \
+      --json createdAt,mergedAt \
+      --jq --arg start "$after_start" --arg end "$after_end" '
+        [.[] | select(.createdAt >= $start and .createdAt <= $end and .mergedAt != null)] |
+        "Count: \(length), Average: \(if length > 0 then (map((.mergedAt | fromdateiso8601) - (.createdAt | fromdateiso8601)) | add / length / 3600 | floor) else 0 end) hours"'
+}
+
 # --------------------
 # notify whether success or failure to user with the sound
 # --------------------
