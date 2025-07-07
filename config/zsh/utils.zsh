@@ -120,26 +120,49 @@ function pr_analysis() {
         echo "Usage: pr_analysis owner/repository"
         return 1
     fi
-    # after_startと同いちにちじ
-    local improvement_date="2025-03-08T00:00:00Z"
+
     local before_start="2025-01-01T00:00:00Z"
     local before_end="2025-03-07T23:59:59Z"
     local after_start="2025-03-08T00:00:00Z"
-    local after_end="2025-6-31T23:59:59Z"
+    local after_end="2025-06-30T23:59:59Z"
 
     echo "=== 改善前 ==="
     gh pr list --repo "$repo" --state closed --limit 200 \
       --json createdAt,mergedAt \
-      --jq --arg start "$before_start" --arg end "$before_end" '
-        [.[] | select(.createdAt >= $start and .createdAt <= $end and .mergedAt != null)] |
-        "Count: \(length), Average: \(if length > 0 then (map((.mergedAt | fromdateiso8601) - (.createdAt | fromdateiso8601)) | add / length / 3600 | floor) else 0 end) hours"'
+      --jq "[.[] | select(.createdAt >= \"$before_start\" and .createdAt <= \"$before_end\" and .mergedAt != null)] |
+        \"Count: \(length), Average: \(if length > 0 then (map((.mergedAt | fromdateiso8601) - (.createdAt | fromdateiso8601)) | add / length / 3600 | floor) else 0 end) hours\""
 
     echo "=== 改善後 ==="
     gh pr list --repo "$repo" --state closed --limit 200 \
       --json createdAt,mergedAt \
-      --jq --arg start "$after_start" --arg end "$after_end" '
-        [.[] | select(.createdAt >= $start and .createdAt <= $end and .mergedAt != null)] |
-        "Count: \(length), Average: \(if length > 0 then (map((.mergedAt | fromdateiso8601) - (.createdAt | fromdateiso8601)) | add / length / 3600 | floor) else 0 end) hours"'
+      --jq "[.[] | select(.createdAt >= \"$after_start\" and .createdAt <= \"$after_end\" and .mergedAt != null)] |
+        \"Count: \(length), Average: \(if length > 0 then (map((.mergedAt | fromdateiso8601) - (.createdAt | fromdateiso8601)) | add / length / 3600 | floor) else 0 end) hours\""
+}
+
+function pr_analysis_by_count() {
+    local repo="$1"
+    local improvement_date="$2"
+    local count="$3"
+
+    if [[ -z "$repo" || -z "$improvement_date" || -z "$count" ]]; then
+        echo "Usage: pr_analysis_by_count owner/repository improvement_date count"
+        echo "Example: pr_analysis_by_count sensyn-robotics/plant-check 2025-03-08T00:00:00Z 10"
+        return 1
+    fi
+
+    echo "=== 改善前（改善日より前の${count}個のPR） ==="
+    gh pr list --repo "$repo" --state closed --limit 500 \
+      --json createdAt,mergedAt \
+      --jq "[.[] | select(.createdAt < \"$improvement_date\" and .mergedAt != null)] |
+        sort_by(.createdAt) | reverse | .[0:$count] |
+        \"Count: \(length), Average: \(if length > 0 then (map((.mergedAt | fromdateiso8601) - (.createdAt | fromdateiso8601)) | add / length / 3600 | floor) else 0 end) hours\""
+
+    echo "=== 改善後（改善日以降の${count}個のPR） ==="
+    gh pr list --repo "$repo" --state closed --limit 500 \
+      --json createdAt,mergedAt \
+      --jq "[.[] | select(.createdAt >= \"$improvement_date\" and .mergedAt != null)] |
+        sort_by(.createdAt) | .[0:$count] |
+        \"Count: \(length), Average: \(if length > 0 then (map((.mergedAt | fromdateiso8601) - (.createdAt | fromdateiso8601)) | add / length / 3600 | floor) else 0 end) hours\""
 }
 
 # --------------------
