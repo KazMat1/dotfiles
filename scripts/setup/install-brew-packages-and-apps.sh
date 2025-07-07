@@ -18,7 +18,7 @@ install_brew_packages_and_apps() {
     brew update
 
     echo "💪 Installing packages and apps..."
-    brew bundle --file=$HOME/dotfiles/config/brew/.brewfile
+    brew bundle --file=$HOME/dotfiles/config/brew/Brewfile
 
     echo "✅ installation has complete!"
 }
