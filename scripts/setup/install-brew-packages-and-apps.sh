@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+BREW_FILE_NAME=".Brewfile"
+
 # Homebrewのインストール
 install_brew_command() {
     echo "🚀 Setting up Homebrew..."
@@ -18,9 +20,9 @@ install_brew_packages_and_apps() {
     brew update
 
     echo "💪 Installing packages and apps..."
-    brew bundle --file=$HOME/dotfiles/config/brew/Brewfile
+    brew bundle --file=$HOME/dotfiles/config/brew/$BREW_FILE_NAME
 
-    echo "✅ installation has complete!"
+    echo "✅ installation has completed!"
 }
 
 # brew のインストール後に、表示される次のステップを実行
