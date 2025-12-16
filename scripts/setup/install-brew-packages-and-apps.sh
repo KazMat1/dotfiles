@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-BREW_FILE_NAME=".Brewfile"
+BREW_FILE_NAME="Brewfile"
 
 # Homebrewのインストール
 install_brew_command() {
