@@ -17,3 +17,8 @@ source $HOME/dotfiles/config/zsh/warp-functions.zsh
 # asdf
 # ------------------------------------------------------------------------
 source $HOME/dotfiles/config/zsh/asdf.zsh
+
+# ------------------------------------------------------------------------
+# mise
+# ------------------------------------------------------------------------
+source $HOME/dotfiles/config/zsh/mise.zsh
